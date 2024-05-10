@@ -14,7 +14,7 @@ const Login = () => {
   });
   const {email,pass} = form;
 
-  // 로그인폼 데이터 변경
+  // 로그인폼 데이터 변경//
   const onChange = (e) => { 
     setForm({
         ...form,
