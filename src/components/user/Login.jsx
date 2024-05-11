@@ -34,7 +34,14 @@ const Login = () => {
             //alert("로그인성공");
             setLoading(false);
             sessionStorage.setItem('email', email);
-            navi('/');
+            sessionStorage.setItem('uid', success.user.uid);
+            
+            if(sessionStorage.getItem('target')){
+                navi(sessionStorage.getItem('target'));
+            }else{
+                navi('/');
+            }
+            
         })
         .catch(error => {
             alert("에러 :" + error.message);
@@ -52,7 +59,7 @@ const Login = () => {
                     <h3 className='text-center'>로그인</h3>
                 </Card.Header>
                 <Card.Body>
-                    <form onClick={onSubmit}>
+                    <form >
                         <InputGroup className='mb-2'>
                             <InputGroup.Text style={{width:100}} className='justify-content-center'>이메일</InputGroup.Text>
                             <Form.Control name='email' value={email} onChange={onChange}></Form.Control>
@@ -62,7 +69,7 @@ const Login = () => {
                             <Form.Control name='pass' type='password' value={pass} onChange={onChange}></Form.Control>
                         </InputGroup>
                         <div>
-                            <Button className='w-100' type='submit'>로그인</Button>
+                            <Button onClick={onSubmit} className='w-100' type='submit'>로그인</Button>
                         </div>
                     </form>
                 </Card.Body>
