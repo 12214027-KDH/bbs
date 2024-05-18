@@ -6,6 +6,7 @@ import { TiShoppingCart } from "react-icons/ti";
 import { useNavigate } from 'react-router-dom';
 import { app } from '../../firebaseInit';
 import { getDatabase, ref, set, get } from 'firebase/database';
+import Book from './Book';
 
 const Books = () => {
   const db = getDatabase(app);
@@ -79,7 +80,8 @@ const Books = () => {
           <Col key={book.isbn} xs={6} md={3} lg={2} className='mb-2'>
             <Card>
               <Card.Body className='justify-content-center d-flex'>
-                <img wdith="90%" src={book.thumbnail || 'http://via.placeholder.com/120x170'}/>
+                {/* <img wdith="90%" src={book.thumbnail || 'http://via.placeholder.com/120x170'}/> */}
+                <Book book={book}/>
               </Card.Body>
               <Card.Footer>
                 <div className='ellipsis'>{book.title}</div>
