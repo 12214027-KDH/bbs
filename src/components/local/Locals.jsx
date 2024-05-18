@@ -49,8 +49,8 @@ const Locals = () => {
 
     useEffect(()=>{
         callAPI();
-      }, []);
-
+      }, [page]);
+      
   const onSubmit = (e) => {
     e.preventDefault();
     if(query === ""){
@@ -96,6 +96,11 @@ const Locals = () => {
                 )}
             </tbody>
         </Table>
+        <div className='text-center my-3'>
+        <Button onClick={()=> setPage(page-1)} disabled={page===1}>이전</Button>
+        <span className='mx-2'>{page}</span>
+        <Button onClick={()=> setPage(page+1)}>다음</Button>
+      </div>
     </div>
   )
 }
