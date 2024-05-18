@@ -4,6 +4,8 @@ import {Table,Row, Col, InputGroup, Form, Button} from 'react-bootstrap'
 import { app } from '../../firebaseInit';
 import { getDatabase, ref, set, get } from 'firebase/database';
 import { useNavigate } from 'react-router-dom';
+import Local from './Local';
+
 const Locals = () => {
     const navi = useNavigate();
     const db = getDatabase(app);
@@ -22,10 +24,15 @@ const Locals = () => {
           headers: {"Authorization":"KakaoAK b63f7fcac38c737b722b07b0f94c447b"}
         };
         const res = await axios.get(url,config);
-        console.log(res.data.documents);
-        setLocals(res.data.documents);
+        const data = res.data;
+        setLocals(data.documents);
         setLoading(false);
     }
+
+    useEffect(()=>{
+      callAPI();
+    }, [page]);
+    
     const onClickFavorite = async(local) => {
         if(!uid){
             sessionStorage.setItem('target', '/locals');
@@ -47,9 +54,7 @@ const Locals = () => {
         }
     }
 
-    useEffect(()=>{
-        callAPI();
-      }, [page]);
+    
       
   const onSubmit = (e) => {
     e.preventDefault();
@@ -82,6 +87,7 @@ const Locals = () => {
                     <td>주소</td>
                     <td>전화</td>
                     <td>즐겨찾기</td>
+                    <td>위치</td>
                 </tr>
             </thead>
             <tbody>
@@ -92,6 +98,7 @@ const Locals = () => {
                         <td>{local.address_name}</td>
                         <td>{local.phone}</td>
                         <td><Button onClick={()=>onClickFavorite(local)}>즐겨찾기</Button></td>
+                        <td><Local local={local}/></td>
                     </tr>
                 )}
             </tbody>
