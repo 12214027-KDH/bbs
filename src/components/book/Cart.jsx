@@ -41,6 +41,7 @@ const Cart = () => {
       <Table>
         <thead>
             <tr>
+              <td></td>
               <td cloSpan={2}>도서제목</td>
               <td>가격</td>
               <td>저자</td>
